@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ecossistema Empresa Produtiva</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#1a2b47">
+<meta name="apple-mobile-web-app-title" content="Empresa Produtiva">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eceef2;
+  --surface:#ffffff;
+  --surface-2:#f6f7f9;
+  --ink:#0b121f;
+  --ink-soft:#4a5363;
+  --line:#d5d9e0;
+  --navy:#1a2b47;
+  --navy-hover:#23385c;
+  --vinho:#721035;
+  --vinho-hover:#8a1a44;
+  --telha:#a6280c;
+  --telha-hover:#bd3616;
+  --laranja:#c14b21;
+  --on-dark:#ffffff;
+  --on-dark-soft:rgba(255,255,255,.72);
+  --ok:#2e7a57;
+  --wip:#c14b21;
+  --todo:#8a93a3;
+  --none:#c3c8d1;
+  --focus:#c14b21;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0b121f;
+    --surface:#141d2e;
+    --surface-2:#1a2438;
+    --ink:#eef1f6;
+    --ink-soft:#a8b1c2;
+    --line:#2a3650;
+    --navy:#243b61;
+    --navy-hover:#2d4874;
+    --vinho:#8a1a44;
+    --vinho-hover:#a02452;
+    --telha:#b33216;
+    --telha-hover:#c9401f;
+    --ok:#48a37a;
+    --todo:#7c8698;
+    --none:#465169;
+    --focus:#e0754c;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0b121f;
+  --surface:#141d2e;
+  --surface-2:#1a2438;
+  --ink:#eef1f6;
+  --ink-soft:#a8b1c2;
+  --line:#2a3650;
+  --navy:#243b61;
+  --navy-hover:#2d4874;
+  --vinho:#8a1a44;
+  --vinho-hover:#a02452;
+  --telha:#b33216;
+  --telha-hover:#c9401f;
+  --ok:#48a37a;
+  --todo:#7c8698;
+  --none:#465169;
+  --focus:#e0754c;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Poppins", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  overflow-x:hidden;
+}
+img{max-width:100%}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding:36px 24px 72px}
+
+/* cabeçalho */
+.top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:28px}
+.brand h1{font-size:clamp(2rem,4.6vw,3.2rem);line-height:1.05;margin:0;font-weight:700;letter-spacing:-.02em}
+.brand p{margin:.5rem 0 0;color:var(--ink-soft);font-size:1rem;max-width:56ch}
+.sync{font-size:.82rem;color:var(--ink-soft);display:flex;align-items:center;gap:.5rem}
+.sync i{width:9px;height:9px;border-radius:50%;background:var(--none);display:inline-block}
+.sync.on i{background:var(--ok)}
+
+/* cards de números */
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:40px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:16px 18px}
+.stat b{display:block;font-size:2.1rem;line-height:1.1;font-weight:600}
+.stat span{display:block;color:var(--ink-soft);font-size:.88rem;margin-top:4px}
+
+h2.sec{font-size:1.15rem;font-weight:600;margin:0 0 14px}
+.sec-note{color:var(--ink-soft);font-size:.9rem;margin:-8px 0 16px}
+
+/* botões grandes */
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:40px}
+.tile{
+  position:relative;text-align:left;border:0;cursor:pointer;
+  background:var(--navy);color:var(--on-dark);
+  border-radius:4px;padding:20px 20px 22px;min-height:170px;
+  display:flex;flex-direction:column;gap:6px;
+  transition:background-color .15s ease;
+}
+.tile:hover{background:var(--navy-hover)}
+.tile.vinho{background:var(--vinho)}
+.tile.vinho:hover{background:var(--vinho-hover)}
+.tile.telha{background:var(--telha)}
+.tile.telha:hover{background:var(--telha-hover)}
+.tile .t-name{font-size:1.2rem;font-weight:600;line-height:1.25}
+.tile .t-sub{font-size:.88rem;color:var(--on-dark-soft)}
+.tile .t-phase{margin-top:auto;font-size:.88rem;font-weight:500}
+.strip{position:absolute;left:0;right:0;bottom:0;height:8px;display:flex;gap:2px}
+.strip i{flex:1;background:rgba(255,255,255,.18)}
+.strip i.feito{background:#7fd1a8}
+.strip i.andamento{background:#f0a07f}
+.strip i.afazer{background:rgba(255,255,255,.42)}
+.grid.duo{grid-template-columns:repeat(2,minmax(0,1fr))}
+
+.legend{display:flex;flex-wrap:wrap;gap:16px;font-size:.84rem;color:var(--ink-soft);margin:-24px 0 36px}
+.legend span{display:flex;align-items:center;gap:6px}
+
+/* chips de status */
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none}
+.dot.feito{background:var(--ok)}
+.dot.andamento{background:var(--wip)}
+.dot.afazer{background:var(--todo)}
+.dot.semdado{background:transparent;border:2px dashed var(--none)}
+
+/* navegação interna */
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:18px;font-size:.92rem}
+.crumbs button{background:none;border:0;padding:4px 2px;cursor:pointer;color:var(--ink-soft);text-decoration:underline;text-underline-offset:3px}
+.crumbs button:hover{color:var(--ink)}
+.crumbs .sep{color:var(--ink-soft)}
+.head{border-left:6px solid var(--navy);padding:4px 0 4px 16px;margin-bottom:24px}
+.head.vinho{border-color:var(--vinho)}
+.head.telha{border-color:var(--telha)}
+.head h2{margin:0;font-size:clamp(1.5rem,3vw,2.1rem);line-height:1.15;font-weight:700}
+.head p{margin:.4rem 0 0;color:var(--ink-soft);max-width:70ch}
+.facts{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 24px}
+.fact{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px 14px;min-width:160px}
+.fact small{display:block;color:var(--ink-soft);font-size:.78rem}
+.fact strong{font-weight:600}
+
+/* botões de etapa */
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:22px}
+.steps.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.step{
+  text-align:left;cursor:pointer;background:var(--surface);
+  border:1px solid var(--line);border-left:6px solid var(--navy);
+  border-radius:4px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;min-height:86px;
+}
+.step.vinho{border-left-color:var(--vinho)}
+.step.telha{border-left-color:var(--telha)}
+.step:hover{background:var(--surface-2)}
+.step[aria-pressed="true"]{background:var(--navy);color:var(--on-dark);border-color:var(--navy)}
+.step.vinho[aria-pressed="true"]{background:var(--vinho);border-color:var(--vinho)}
+.step.telha[aria-pressed="true"]{background:var(--telha);border-color:var(--telha)}
+.step .s-name{font-weight:600}
+.step .s-status{display:flex;align-items:center;gap:6px;font-size:.84rem;color:var(--ink-soft)}
+.step[aria-pressed="true"] .s-status{color:var(--on-dark-soft)}
+.step[aria-pressed="true"] .dot.semdado{border-color:rgba(255,255,255,.6)}
+
+/* painel da etapa */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:22px 24px}
+.panel h3{margin:0 0 12px;font-size:1.25rem}
+.status-pick{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+.status-pick button{
+  display:flex;align-items:center;gap:8px;cursor:pointer;
+  background:var(--surface-2);border:1px solid var(--line);border-radius:4px;padding:8px 12px;font-size:.9rem;
+}
+.status-pick button[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink);font-weight:600}
+.status-pick button:disabled{cursor:default;opacity:.65}
+.hint{font-size:.82rem;color:var(--ink-soft);margin:-10px 0 16px}
+.notes{margin:0 0 16px;padding-left:1.2rem;max-width:78ch}
+.notes li{margin:.3rem 0}
+.empty{color:var(--ink-soft);margin:0}
+
+/* documentos */
+details.doc{border:1px solid var(--line);border-radius:6px;margin:12px 0;background:var(--surface)}
+details.doc > summary{cursor:pointer;padding:14px 16px;font-weight:600;display:flex;justify-content:space-between;gap:12px;list-style:none}
+details.doc > summary::-webkit-details-marker{display:none}
+details.doc > summary::after{content:"Abrir";font-weight:500;font-size:.85rem;color:var(--ink-soft);flex:none}
+details.doc[open] > summary::after{content:"Fechar"}
+details.doc[open] > summary{border-bottom:1px solid var(--line)}
+.doc-body{padding:8px 22px 24px;max-width:80ch;line-height:1.7}
+.doc-body table{border-collapse:collapse;font-size:.9rem}
+.doc-body td,.doc-body th{border:1px solid var(--line);padding:8px;vertical-align:top}
+.tablewrap{overflow-x:auto;max-width:100%}
+.doc-body pre{overflow-x:auto;white-space:pre-wrap}
+.doc-body a{color:var(--laranja)}
+.doc-body p.h-like{font-weight:600}
+.toc{background:var(--surface-2);border:1px solid var(--line);border-radius:4px;padding:10px 14px;margin:12px 0 18px}
+.toc summary{cursor:pointer;font-weight:600;font-size:.92rem}
+.toc ul{list-style:none;margin:8px 0 0;padding-left:0;max-height:320px;overflow:auto;font-size:.9rem}
+.toc a{color:var(--ink)}
+.toc li{margin:.15rem 0}
+.toc li.sub{margin-left:1.2rem;font-size:.86rem}
+
+.esteira{width:100%;border-collapse:collapse;font-size:.95rem}
+.esteira th,.esteira td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.esteira th{font-weight:600;color:var(--ink-soft);font-size:.85rem}
+
+@media (max-width:860px){
+  .grid,.steps,.steps.four{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:520px){
+  .wrap{padding:24px 14px 56px}
+  .grid,.grid.duo,.steps,.steps.four{grid-template-columns:1fr}
+  .tile{min-height:130px}
+  .panel{padding:18px 14px}
+  .doc-body{padding:8px 12px 20px}
+}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+
+.sync,.legend{display:none}
+.userbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:.85rem;color:var(--ink-soft)}
+.btn{cursor:pointer;background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:8px 12px;font-size:.88rem;color:var(--ink)}
+.btn:hover{background:var(--surface-2)}
+.btn.primary{background:var(--navy);border-color:var(--navy);color:var(--on-dark)}
+.btn.primary:hover{background:var(--navy-hover)}
+.btn.link{background:none;border:0;text-decoration:underline;text-underline-offset:3px;padding:8px 4px;color:var(--ink-soft)}
+#import-msg{flex-basis:100%;text-align:right;margin:0;min-height:1.2em}
+.aviso{background:#fbe9e3;color:#7a1f06;border:1px solid #e9b8a6;border-radius:6px;padding:12px 16px;margin:0 0 24px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .aviso{background:#3a1a12;color:#f5c9b8;border-color:#6b2c1a}}
+.login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.login-card{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--navy);border-radius:6px;padding:28px;width:100%;max-width:400px}
+.login-card h1{margin:0 0 4px;font-size:1.8rem;line-height:1.1}
+.login-card p{margin:0 0 20px;color:var(--ink-soft);font-size:.92rem}
+.login-card label{display:block;font-size:.85rem;font-weight:500;margin:12px 0 4px}
+input[type=email],input[type=password],input[type=text],input[type=url]{
+  width:100%;font:inherit;font-size:.95rem;color:var(--ink);background:var(--surface-2);
+  border:1px solid var(--line);border-radius:4px;padding:10px 12px}
+.login-actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:18px}
+.login-msg{min-height:1.4em;margin:12px 0 0!important;color:var(--ink)!important}
+.carregando{min-height:60vh;display:flex;align-items:center;justify-content:center;color:var(--ink-soft)}
+.links{margin-top:22px;border-top:1px solid var(--line);padding-top:16px}
+.links h4{margin:0 0 8px;font-size:1rem}
+.link-list{list-style:none;margin:0 0 12px;padding:0}
+.link-list li{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--line)}
+.link-list a{color:var(--laranja);word-break:break-word}
+.link-del{background:none;border:0;cursor:pointer;color:var(--ink-soft);text-decoration:underline;font-size:.85rem;flex:none}
+.link-form{display:grid;grid-template-columns:1fr 2fr auto;gap:8px;margin-top:10px}
+@media (max-width:640px){.link-form{grid-template-columns:1fr}}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div id="carregando" class="carregando">Carregando o painel...</div>
+
+<div id="login" class="login" hidden>
+  <form class="login-card" id="login-form">
+    <h1>Empresa Produtiva</h1>
+    <p>Entre com o seu e-mail e a sua senha para abrir o painel do ecossistema.</p>
+    <label for="email">E-mail</label>
+    <input id="email" type="email" autocomplete="username" required>
+    <label for="senha">Senha</label>
+    <input id="senha" type="password" autocomplete="current-password" required>
+    <div class="login-actions">
+      <button type="submit" class="btn primary">Entrar</button>
+      <button type="button" class="btn link" id="esqueci">Esqueci a senha</button>
+    </div>
+    <p class="login-msg" id="login-msg" aria-live="polite"></p>
+  </form>
+</div>
+
+<div class="wrap" id="painel" hidden>
+  <header class="top">
+    <div class="brand">
+      <h1>Empresa Produtiva</h1>
+      <p>Painel do ecossistema: os produtos da esteira, a produção de conteúdo e as informações básicas da marca.</p>
+    </div>
+    <div class="userbar">
+      <span id="quem"></span>
+      <button type="button" class="btn" id="importar">Importar documentos</button>
+      <button type="button" class="btn" id="sair">Sair</button>
+      <input type="file" id="arquivo" accept="application/json,.json" hidden>
+      <p id="import-msg" aria-live="polite"></p>
+    </div>
+  </header>
+  <div class="aviso" id="aviso" role="alert" hidden></div>
+  <main id="app"></main>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+
+
+var STATUS = {
+  feito:{label:"Concluído"},
+  andamento:{label:"Em andamento"},
+  afazer:{label:"A fazer"},
+  semdado:{label:"Sem informação"}
+};
+var STATUS_ORDER = ["feito","andamento","afazer","semdado"];
+
+var PRODUCT_STEPS = [
+  {id:"escrever", label:"Escrever roteiro"},
+  {id:"revisar", label:"Revisar roteiro"},
+  {id:"gravar", label:"Gravar curso"},
+  {id:"editar", label:"Editar curso"},
+  {id:"criativos", label:"Criativos de vendas"},
+  {id:"paginas", label:"Páginas de vendas"}
+];
+var CONTENT_STEPS = [
+  {id:"escrever", label:"Escrever roteiro"},
+  {id:"revisar", label:"Revisar roteiro"},
+  {id:"gravar", label:"Gravar"},
+  {id:"editar", label:"Editar"}
+];
+
+var REGRAS_REVISAO = [
+  "Sem travessão, sem emoji e sem vírgula antes de \u201ce\u201d e de \u201cou\u201d.",
+  "Acentos e cedilhas completos, títulos em caixa baixa e tratamento por você.",
+  "Frases completas, sem cortar artigo nem quantificador, e sem reduções como pra, pro e tá.",
+  "Sem a construção \u201cnão é X, é Y\u201d e variantes.",
+  "Vocabulário fora do roteiro: processo fora do sentido judicial, estratégia, fórmula, segredo, copiloto, gargalo, ticket médio, faturamento, fluxo de caixa e achismo.",
+  "Expressões fora do roteiro: travar e derivados, no chute, no susto, no escuro, quebrar empresa, morar na cabeça e \u201cé só um algo caro\u201d.",
+  "Sem analogias de aviação, marinha, exército, Fórmula 1, largada, corrida, remar e piloto automático.",
+  "Números em algarismo, com exceção de um, uma, uns e umas.",
+  "Procurar a muleta \u201cé aqui que o Claude entra\u201d e as variantes antes de entregar.",
+  "O palavrão que vem da sua própria fala permanece no roteiro."
+];
+
+var PRODUCTS = [
+  {
+    id:"express", nome:"Consultoria Express",
+    sub:"Consultoria individual de 2 horas",
+    resumo:"Conversa individual de 2 horas com 4 entregáveis: o resumo com o problema central, o checklist de tarefas mínimas, o plano de ação aprofundado e o vídeo personalizado como bônus. É a porta de entrada da esteira.",
+    fatos:[["Preço","R$ 397 promocional e R$ 697 cheio"],["Retorno","R$ 197"],["Duração","2 horas"]],
+    defaults:{escrever:"semdado",revisar:"semdado",gravar:"semdado",editar:"semdado",criativos:"feito",paginas:"feito"},
+    etapas:{
+      escrever:{notas:["O kit completo reúne o passo a passo da conversa, os textos que geram os entregáveis e o texto que gera o roteiro do vídeo de cada cliente."],docs:[["express_kit","Consultoria Express, kit completo"]]},
+      criativos:{notas:["Criativos de vendas prontos."]},
+      paginas:{notas:["Página de vendas pronta."]}
+    }
+  },
+  {
+    id:"ia", nome:"O que você precisa saber sobre IA para sobreviver num mundo de IA",
+    sub:"Curso online",
+    resumo:"Curso para a dona de negócio aprender a conversar com a inteligência artificial e a usar o Claude na própria empresa. Curso gravado e no ar.",
+    fatos:[["Preço","R$ 147"]],
+    defaults:{escrever:"feito",revisar:"feito",gravar:"feito",editar:"feito",criativos:"semdado",paginas:"feito"},
+    etapas:{
+      escrever:{notas:["Roteiro escrito. A cópia completa está em Revisar roteiro."]},
+      revisar:{notas:["A numeração dos módulos foi alterada de propósito na hora da gravação."],docs:[["ia_roteiro","Roteiro completo do curso de IA, versão para teleprompter"]]},
+      gravar:{notas:["Curso gravado."]},
+      editar:{notas:["Curso editado e no ar."]},
+      paginas:{notas:["Página de vendas no ar."]}
+    }
+  },
+  {
+    id:"financas", nome:"Finanças com Claude para quem odeia finanças",
+    sub:"Curso online, 8 módulos",
+    resumo:"Curso para a dona de negócio parar de fugir do dinheiro, separar as contas, montar os painéis financeiros com o Claude e chegar ao preço justo.",
+    fatos:[["Preço","R$ 197"]],
+    defaults:{escrever:"feito",revisar:"andamento",gravar:"afazer",editar:"afazer",criativos:"afazer",paginas:"afazer"},
+    etapas:{
+      escrever:{notas:["Roteiro escrito. A cópia completa está em Revisar roteiro."],docs:[["fin_estrutura","Estrutura do curso Finanças com Claude"]]},
+      revisar:{notas:["Fase atual: revisão dos roteiros."],docs:[["fin_roteiro","Roteiro completo do curso Finanças com Claude"]]}
+    }
+  },
+  {
+    id:"rh", nome:"RH com Claude para quem odeia RH",
+    sub:"Curso online, 6 módulos",
+    resumo:"Curso para quem não sabe nada de RH: preparar o Claude, calcular o custo real do CLT, montar o manual da empresa e cuidar da admissão, da rotina mensal e da saída.",
+    fatos:[["Preço","R$ 197"]],
+    defaults:{escrever:"feito",revisar:"andamento",gravar:"afazer",editar:"afazer",criativos:"afazer",paginas:"afazer"},
+    etapas:{
+      escrever:{notas:["Roteiro escrito. A cópia completa está em Revisar roteiro."]},
+      revisar:{notas:["Fase atual: revisão dos roteiros."],docs:[["rh_roteiro","Roteiros completos do curso RH com Claude para quem odeia RH"]]}
+    }
+  },
+  {
+    id:"planejamento", nome:"Planejamento de Conteúdo com o Claude",
+    sub:"Curso online, 9 módulos",
+    resumo:"Curso para montar o painel de conteúdo com o Claude, guardar e desenvolver as ideias, planejar o mês, pesquisar referências, criar as artes e ler os números.",
+    fatos:[["Preço","A definir"]],
+    defaults:{escrever:"feito",revisar:"andamento",gravar:"afazer",editar:"afazer",criativos:"afazer",paginas:"afazer"},
+    etapas:{
+      escrever:{notas:["Estrutura em 9 módulos, cada um com o seu entregável."],docs:[["plan_estrutura","Estrutura do curso Planejamento de Conteúdo com o Claude, versão 3"]]},
+      revisar:{notas:["Fase atual: revisão dos roteiros.","O roteiro completo deste curso ainda não foi anexado ao painel. Por enquanto, a estrutura versão 3 está em Escrever roteiro."]}
+    }
+  },
+  {
+    id:"mentoria", nome:"Mentoria Empresa Produtiva",
+    sub:"Acompanhamento por temporada, em turma fechada",
+    resumo:"Mentoria que começa pelo diagnóstico da Consultoria Express e segue com encontros individuais de 2 horas, live semanal e os 4 pilares: enxergar o todo, traçar o caminho, colocar em prática e medir o quanto andou.",
+    fatos:[["3 meses","R$ 3.500"],["6 meses","R$ 6.000"],["Turma","Abre com 8 a 10 e fecha em 15"]],
+    defaults:{escrever:"semdado",revisar:"semdado",gravar:"semdado",editar:"semdado",criativos:"semdado",paginas:"semdado"},
+    etapas:{
+      escrever:{notas:["Estrutura da mentoria, versão 3."],docs:[["mentoria","Estrutura da mentoria, versão 3"]]}
+    }
+  }
+];
+
+var CHANNELS = [
+  {
+    id:"instagram", nome:"Instagram", sub:"Reels",
+    etapas:{
+      escrever:{notas:[
+        "Vídeo de consciência com 1 minuto e 40 segundos, entre 280 e 300 palavras.",
+        "Vídeo prático com 1 minuto e 35 segundos, entre 240 e 260 palavras.",
+        "Micro-história com 90 segundos e o pico no fim.",
+        "Conta de 2,9 palavras por segundo do vídeo editado.",
+        "Blocos do roteiro: gancho, ponte, causa, solução, chamada do meio, detalhe ignorado, crença, prova e fechamento com pergunta.",
+        "Legenda com até 50 palavras, seguida das 4 hashtags fixas: #EmpreendedorismoFeminino #IAParaEmpresas #PequenosNegocios #MulherEmpreendedora, mais #OrganizacaoFinanceira nos posts de dinheiro.",
+        "Plataforma prioritária, porque os vídeos rendem mais aqui do que no TikTok."
+      ],docs:[["manual","Manual de roteiros de vídeo curto, versão 19"],["ganchos","Banco completo de ganchos, versão 4"]]},
+      revisar:{notas:REGRAS_REVISAO},
+      gravar:{notas:[
+        "Não encurtar o texto durante a gravação: 261 palavras levam cerca de 2 minutos e 25 segundos no ritmo bruto e viram 1 minuto e 30 depois da edição.",
+        "A versão longa é gravada uma vez só e a versão do Instagram sai na edição.",
+        "Formatos: tela dividida, fundo verde e falando para a câmera.",
+        "Estímulos para testar nos primeiros segundos: ambiente diferente, lugar público, cor forte na roupa e outro ângulo.",
+        "Equipamento: webcam Logitech C920 e 2 softboxes."
+      ]},
+      editar:{notas:[
+        "Retirar os blocos marcados como exclusivos do TikTok.",
+        "A edição leva a fala de 108 para 174 palavras por minuto.",
+        "Cortar com generosidade o que é estrutura e com parcimônia o que é respiração.",
+        "O cartão de título sai depois da primeira cena e as frases de apoio e o resumo salvável do fim continuam.",
+        "Caixas de título feitas a partir do modelo Caixas de titulo - Isabella Fortunato.pptx, em 4 cores.",
+        "A capa aparece no perfil e na busca e merece cuidado."
+      ]}
+    }
+  },
+  {
+    id:"tiktok", nome:"TikTok", sub:"Vídeos longos",
+    etapas:{
+      escrever:{notas:[
+        "Vídeo de consciência com 2 minutos e 25 segundos, dentro da faixa de 350 a 435 palavras.",
+        "Vídeo prático entre 290 e 330 palavras.",
+        "O roteiro é escrito na versão longa, com os blocos exclusivos do TikTok marcados.",
+        "Na solução cabem 2 passos."
+      ],docs:[["manual","Manual de roteiros de vídeo curto, versão 19"],["ganchos","Banco completo de ganchos, versão 4"]]},
+      revisar:{notas:REGRAS_REVISAO},
+      gravar:{notas:[
+        "Não encurtar o texto durante a gravação.",
+        "O material falado direto para a câmera funciona bem nesta plataforma.",
+        "Equipamento: webcam Logitech C920 e 2 softboxes."
+      ]},
+      editar:{notas:[
+        "A edição leva a fala de 108 para 174 palavras por minuto.",
+        "A subida pode ser mais lenta do que no Instagram.",
+        "O áudio em alta ajuda na distribuição inicial."
+      ]}
+    }
+  },
+  {
+    id:"stories", nome:"Stories", sub:"Sequências",
+    etapas:{
+      escrever:{notas:[
+        "Sequência com até 10 telas, com o texto e a descrição do design de cada tela, sem Headline e sem CTA.",
+        "Banco existente: 18 sequências de 5 stories e 56 textos de caixinhas por área."
+      ]},
+      revisar:{notas:REGRAS_REVISAO}
+    }
+  },
+  {
+    id:"carrosseis", nome:"Carrosséis", sub:"Posts em telas",
+    etapas:{
+      escrever:{notas:[
+        "Até 20 telas, com até 25 palavras por tela.",
+        "A primeira tela se chama Headline e a última se chama CTA."
+      ]},
+      revisar:{notas:REGRAS_REVISAO}
+    }
+  },
+  {
+    id:"youtube", nome:"YouTube", sub:"Vídeos longos",
+    etapas:{
+      escrever:{notas:[
+        "Vídeos de 10 a 15 minutos montados com roteiros do mesmo tema, usando as palavras dos roteiros revisados, sem texto novo.",
+        "Vídeo mais curto e inteiriço tem preferência sobre esticar o roteiro até os 15 minutos.",
+        "Os temas de organização e produtividade continuam como vídeos próprios, recontextualizados para a gestão da empresa.",
+        "A introdução precisa ter os 4 elementos: empreendedorismo, organização, produtividade e inteligência artificial.",
+        "O Claude aparece na promessa da introdução, no primeiro minuto.",
+        "No título, o nome da ferramenta só entra quando a inteligência artificial é o próprio assunto.",
+        "O convite para seguir fica no meio do vídeo.",
+        "Bloco fixo de apresentação: \u201cOi, eu sou a Isabella Fortunato, empreendo há quinze anos e toco duas empresas. Aqui eu falo com mulheres empresárias, as que fazem quase tudo sozinhas ou com uma ou duas pessoas ajudando. E o que eu mostro neste canal é como usar a inteligência artificial para organizar a empresa por dentro, o dinheiro, o preço, a rotina e as pessoas, e para a sua produtividade finalmente render, sem você precisar entender nada de tecnologia.\u201d"
+      ]},
+      revisar:{notas:REGRAS_REVISAO}
+    }
+  }
+];
+
+var INFO = [
+  {id:"eu", nome:"Quem sou eu", sub:"História, trajetória e propósito",
+   docs:[["essa_sou_eu","Essa sou eu"],["historia","Sobre a minha história"],["proposito","Meu propósito"]]},
+  {id:"empresa", nome:"Quem é a Empresa Produtiva", sub:"Propostas de valor, DPS e versões anteriores da oferta",
+   docs:[["propostas","Empresa Produtiva, propostas de valor"],["dps","DPS Empresa Produtiva"],["apresentacao","Versão anterior: Apresentação"],["consultoria_antiga","Versão anterior: Isabella Fortunato, Consultoria Produtiva"]]},
+  {id:"posicionamento", nome:"Posicionamento", sub:"Atributos, tom de voz e arquétipo",
+   notas:["Em setembro de 2026 o posicionamento passou a girar em torno da inteligência artificial (Claude) aplicada a empresas. Os documentos abaixo são anteriores a essa decisão."],
+   docs:[["posicionamento","Posicionamento"],["timeline","Quem é você na sua timeline"],["arquetipo","Arquétipo da Sábia"]]},
+  {id:"problemas", nome:"Problemas e soluções", sub:"8 grupos de problemas e 4 camadas de soluções",
+   docs:[["problemas","Problemas e soluções, 16 de setembro"]]},
+  {id:"leticia", nome:"Quem é a Letícia", sub:"A persona",
+   docs:[["leticia","A minha persona, a Letícia"]]},
+  {id:"esteira", nome:"Esteira e preços", sub:"Os 6 produtos lado a lado", esteira:true}
+];
+
+/* estado */
+var overrides = {};
+var links = {};
+var fb = null;
+var docCache = {};
+var openDocs = {};
+
+function key(scope, item, step){ return scope + ":" + item + ":" + step; }
+function getStatus(scope, item, step, fallback){
+  var k = key(scope, item, step);
+  if (overrides[k] && STATUS[overrides[k]]) return overrides[k];
+  return fallback || "semdado";
+}
+function productStatus(p, stepId){ return getStatus("p", p.id, stepId, p.defaults[stepId]); }
+function channelStatus(c, stepId){ return getStatus("c", c.id, stepId, "semdado"); }
+
+function setStatus(scope, item, step, value){
+  var k = key(scope,item,step);
+  overrides[k] = value;
+  rerender();
+  if (!fb) return;
+  var patch = {}; patch[k] = value;
+  fb.fs.setDoc(fb.fs.doc(fb.db,"painel","status"), {status: patch}, {merge:true}).catch(function(e){
+    showError("O andamento não foi salvo. Confira a conexão e tente de novo. (" + ((e && e.code) || "erro") + ")");
+  });
+}
+
+function linkList(k){ return Array.isArray(links[k]) ? links[k] : []; }
+function saveLinks(k, arr){
+  links[k] = arr;
+  rerender();
+  if (!fb) return;
+  var patch = {}; patch[k] = arr;
+  fb.fs.setDoc(fb.fs.doc(fb.db,"painel","links"), {links: patch}, {merge:true}).catch(function(e){
+    showError("O link não foi salvo. Confira a conexão e tente de novo. (" + ((e && e.code) || "erro") + ")");
+  });
+}
+
+function showError(text){
+  var a = document.getElementById("aviso");
+  a.textContent = text;
+  a.hidden = false;
+}
+
+function phaseOf(p){
+  if (productStatus(p,"paginas") === "feito" && productStatus(p,"editar") === "feito") return "No ar";
+  if (productStatus(p,"paginas") === "feito") return "À venda";
+  for (var i=0;i<PRODUCT_STEPS.length;i++){
+    if (productStatus(p, PRODUCT_STEPS[i].id) === "andamento") return "Em andamento: " + PRODUCT_STEPS[i].label.toLowerCase();
+  }
+  var anyKnown = PRODUCT_STEPS.some(function(s){ return productStatus(p,s.id) !== "semdado"; });
+  if (!anyKnown) return "Andamento sem informação";
+  for (var j=0;j<PRODUCT_STEPS.length;j++){
+    if (productStatus(p, PRODUCT_STEPS[j].id) === "afazer") return "Próxima etapa: " + PRODUCT_STEPS[j].label.toLowerCase();
+  }
+  return "Todas as etapas registradas";
+}
+
+/* utilidades */
+function el(tag, attrs, kids){
+  var n = document.createElement(tag);
+  if (attrs) Object.keys(attrs).forEach(function(a){
+    if (a === "class") n.className = attrs[a];
+    else if (a === "text") n.textContent = attrs[a];
+    else if (a.slice(0,2) === "on") n.addEventListener(a.slice(2), attrs[a]);
+    else n.setAttribute(a, attrs[a]);
+  });
+  (kids||[]).forEach(function(k){ if (k != null) n.appendChild(typeof k === "string" ? document.createTextNode(k) : k); });
+  return n;
+}
+function go(hash){ if (location.hash === hash) render(); else location.hash = hash; window.scrollTo(0,0); }
+function route(){ return location.hash.replace(/^#\/?/, "").split("/").filter(Boolean).map(decodeURIComponent); }
+
+function crumbs(items){
+  var c = el("nav", {class:"crumbs","aria-label":"Caminho"});
+  items.forEach(function(it, i){
+    if (i) c.appendChild(el("span",{class:"sep","aria-hidden":"true",text:"/"}));
+    if (it[1] !== null) c.appendChild(el("button",{type:"button",text:it[0],onclick:function(){ go(it[1]); }}));
+    else c.appendChild(el("span",{text:it[0]}));
+  });
+  return c;
+}
+
+function statusLine(st){
+  return el("span",{class:"s-status"},[el("i",{class:"dot "+st,"aria-hidden":"true"}), STATUS[st].label]);
+}
+
+function strip(statuses){
+  var s = el("span",{class:"strip","aria-hidden":"true"});
+  statuses.forEach(function(st){ s.appendChild(el("i",{class:st})); });
+  return s;
+}
+
+/* documentos */
+function fetchDoc(k){
+  if (docCache[k]) return Promise.resolve(docCache[k]);
+  if (!fb) return Promise.reject(new Error("sem login"));
+  return fb.fs.getDoc(fb.fs.doc(fb.db,"documentos",k)).then(function(s){
+    if (!s.exists()) return null;
+    docCache[k] = s.data();
+    return docCache[k];
+  });
+}
+
+function linksBlock(k){
+  var box = el("div",{class:"links"});
+  box.appendChild(el("h4",{text:"Arquivos no Google Drive"}));
+  var arr = linkList(k);
+  if (arr.length){
+    var ul = el("ul",{class:"link-list"});
+    arr.forEach(function(l, i){
+      ul.appendChild(el("li",{},[
+        el("a",{href:l.url,target:"_blank",rel:"noopener",text:l.titulo || l.url}),
+        el("button",{type:"button",class:"link-del","aria-label":"Remover " + (l.titulo || l.url),text:"Remover",onclick:function(){
+          if (!window.confirm("Remover o link " + (l.titulo || l.url) + "?")) return;
+          var n = arr.slice(); n.splice(i,1); saveLinks(k, n);
+        }})
+      ]));
+    });
+    box.appendChild(ul);
+  } else {
+    box.appendChild(el("p",{class:"empty",text:"Nenhum link guardado aqui ainda."}));
+  }
+  var t = el("input",{type:"text",placeholder:"Nome do arquivo","aria-label":"Nome do arquivo"});
+  var u = el("input",{type:"url",placeholder:"Endereço do arquivo no Google Drive","aria-label":"Endereço do arquivo"});
+  var msg = el("p",{class:"hint","aria-live":"polite"});
+  var f = el("form",{class:"link-form",onsubmit:function(ev){
+    ev.preventDefault();
+    var url = u.value.trim();
+    if (!/^https:\/\//i.test(url)){ msg.textContent = "Cole um endereço que comece com https://."; return; }
+    saveLinks(k, arr.concat([{titulo: t.value.trim() || url, url: url}]));
+  }},[t, u, el("button",{type:"submit",class:"btn",text:"Guardar link"})]);
+  box.appendChild(f);
+  box.appendChild(msg);
+  return box;
+}
+
+function docBlock(keyName, title, open){
+  var d = el("details",{class:"doc"});
+  d.appendChild(el("summary",{},[el("span",{text:title})]));
+  var body = el("div",{class:"doc-body"});
+  d.appendChild(body);
+  var loaded = false;
+  function load(){
+    if (loaded) return; loaded = true;
+    if (docCache[keyName]) { fill(docCache[keyName]); return; }
+    var wait = el("p",{class:"empty",text:"Carregando o documento..."});
+    body.appendChild(wait);
+    fetchDoc(keyName).then(function(data){
+      wait.remove();
+      fill(data);
+    }).catch(function(){
+      wait.textContent = "Não foi possível carregar o documento. Confira a conexão, feche e abra de novo.";
+      loaded = false;
+    });
+  }
+  function fill(data){
+    if (!data || !data.html){
+      body.appendChild(el("p",{class:"empty",text:"Este documento ainda não foi importado. Use o botão Importar documentos, no topo do painel."}));
+      return;
+    }
+    var tpl = document.createElement("template");
+    tpl.innerHTML = data.html;
+    var frag = tpl.content;
+    frag.querySelectorAll("table").forEach(function(t){
+      var w = el("div",{class:"tablewrap"}); t.parentNode.insertBefore(w,t); w.appendChild(t);
+    });
+    frag.querySelectorAll("a[href]").forEach(function(a){ a.setAttribute("target","_blank"); a.setAttribute("rel","noopener"); });
+    var holder = el("div");
+    holder.appendChild(frag);
+    var heads = [];
+    var n = 0;
+    holder.querySelectorAll("h1, h2, h3, p").forEach(function(node){
+      var txt = node.textContent.replace(/\s+/g," ").trim();
+      var isHead = /^H[123]$/.test(node.tagName);
+      var level = node.tagName === "H3" ? 2 : 1;
+      if (!isHead){
+        var strong = node.firstElementChild;
+        var isBold = strong && strong.tagName === "STRONG" && node.textContent.trim() === strong.textContent.trim();
+        var pattern = /^(Módulo|Parte|Capítulo|Aula) [\d.]+[:.]/.test(txt);
+        if (!isBold && !(pattern && txt.length <= 120)) return;
+        if (/^(Módulo|Parte)\b/.test(txt)) level = 1;
+        else if (/^(Capítulo|Aula)\b/.test(txt)) level = 2;
+        else return;
+        if (!isBold) node.classList.add("h-like");
+      } else if (node.tagName === "H2" && heads.some(function(h){return h.tag==="H1";})) level = 2;
+      if (!txt || txt.length > 140) return;
+      var id = "sec-" + keyName + "-" + (n++);
+      node.id = id;
+      heads.push({id:id, txt:txt, level:level, tag:node.tagName});
+    });
+    if (heads.length >= 4){
+      var ol = el("ul");
+      heads.forEach(function(h){
+        var a = el("a",{href:"#",text:h.txt,onclick:function(ev){ ev.preventDefault(); var t=document.getElementById(h.id); if (t) t.scrollIntoView({block:"start"}); }});
+        ol.appendChild(el("li",{class:h.level===2?"sub":""},[a]));
+      });
+      body.appendChild(el("details",{class:"toc"},[el("summary",{text:"Índice ("+heads.length+" seções)"}), ol]));
+    }
+    body.appendChild(holder);
+  }
+  d.addEventListener("toggle", function(){ openDocs[keyName] = d.open; if (d.open) load(); });
+  var shouldOpen = Object.prototype.hasOwnProperty.call(openDocs, keyName) ? openDocs[keyName] : open;
+  if (shouldOpen){ d.open = true; load(); }
+  return d;
+}
+
+function notesList(notas){
+  var ul = el("ul",{class:"notes"});
+  notas.forEach(function(t){ ul.appendChild(el("li",{text:t})); });
+  return ul;
+}
+
+/* telas */
+function viewHome(app){
+  var totalSteps = PRODUCTS.length * PRODUCT_STEPS.length;
+  var done = 0;
+  PRODUCTS.forEach(function(p){ PRODUCT_STEPS.forEach(function(s){ if (productStatus(p,s.id)==="feito") done++; }); });
+  var aVenda = PRODUCTS.filter(function(p){ return productStatus(p,"paginas")==="feito"; }).length;
+  var revisando = PRODUCTS.filter(function(p){ return productStatus(p,"revisar")==="andamento"; }).length;
+
+  var stats = el("section",{class:"stats","aria-label":"Números do ecossistema"});
+  [[PRODUCTS.length,"produtos na esteira"],[aVenda,"com página de vendas pronta"],[revisando,"em revisão de roteiro"],[done+" de "+totalSteps,"etapas concluídas"]].forEach(function(s){
+    stats.appendChild(el("div",{class:"stat"},[el("b",{text:String(s[0])}), el("span",{text:s[1]})]));
+  });
+  app.appendChild(stats);
+
+  app.appendChild(el("h2",{class:"sec",text:"Produtos"}));
+  var g = el("section",{class:"grid"});
+  PRODUCTS.forEach(function(p){
+    g.appendChild(el("button",{type:"button",class:"tile",onclick:function(){ go("#/produto/"+p.id); }},[
+      el("span",{class:"t-name",text:p.nome}),
+      el("span",{class:"t-sub",text:p.sub}),
+      el("span",{class:"t-phase",text:phaseOf(p)})
+    ]));
+  });
+  app.appendChild(g);
+
+
+  app.appendChild(el("h2",{class:"sec",text:"Conteúdo e base da marca"}));
+  var g2 = el("section",{class:"grid duo"});
+  g2.appendChild(el("button",{type:"button",class:"tile vinho",onclick:function(){ go("#/conteudo"); }},[
+    el("span",{class:"t-name",text:"Produção de conteúdo"}),
+    el("span",{class:"t-sub",text:"Instagram, TikTok, stories, carrosséis e YouTube"}),
+    el("span",{class:"t-phase",text:"5 frentes"})
+  ]));
+  g2.appendChild(el("button",{type:"button",class:"tile telha",onclick:function(){ go("#/info"); }},[
+    el("span",{class:"t-name",text:"Informações básicas"}),
+    el("span",{class:"t-sub",text:"Quem sou eu, a empresa, o posicionamento, os problemas e as soluções e a Letícia"}),
+    el("span",{class:"t-phase",text:"6 seções"})
+  ]));
+  app.appendChild(g2);
+}
+
+function stepPanel(tone, steps, stepId, getSt, setSt, etapas){
+  var wrap = el("div");
+  var grid = el("div",{class:"steps"+(steps.length===4?" four":""),role:"group","aria-label":"Etapas"});
+  steps.forEach(function(s){
+    grid.appendChild(el("button",{type:"button",class:"step "+tone,"aria-pressed":String(s.id===stepId),onclick:function(){ setSt.navigate(s.id); }},[
+      el("span",{class:"s-name",text:s.label}),
+      statusLine(getSt(s.id))
+    ]));
+  });
+  wrap.appendChild(grid);
+
+  var step = steps.filter(function(s){ return s.id===stepId; })[0];
+  if (!step){
+    wrap.appendChild(el("p",{class:"empty",text:"Escolha uma etapa para ver o andamento e o material."}));
+    return wrap;
+  }
+  var cur = getSt(step.id);
+  var panel = el("section",{class:"panel","aria-live":"polite"});
+  panel.appendChild(el("h3",{text:step.label}));
+  var pick = el("div",{class:"status-pick",role:"group","aria-label":"Andamento da etapa"});
+  STATUS_ORDER.forEach(function(k){
+    var b = el("button",{type:"button","aria-pressed":String(k===cur),onclick:function(){ if (k!==cur) setSt.status(step.id,k); }},[el("i",{class:"dot "+k,"aria-hidden":"true"}), STATUS[k].label]);
+    pick.appendChild(b);
+  });
+  panel.appendChild(pick);
+
+  var info = etapas && etapas[step.id];
+  var has = false;
+  if (info && info.notas && info.notas.length){ panel.appendChild(notesList(info.notas)); has = true; }
+  if (info && info.docs){ info.docs.forEach(function(d, i){ panel.appendChild(docBlock(d[0], d[1], i===0 && info.docs.length===1)); }); has = true; }
+  if (!has) panel.appendChild(el("p",{class:"empty",text:"Ainda não há material nem orientação registrada para esta etapa."}));
+  panel.appendChild(linksBlock(setSt.linkKey(step.id)));
+  wrap.appendChild(panel);
+  return wrap;
+}
+
+function viewProduct(app, id, stepId){
+  var p = PRODUCTS.filter(function(x){ return x.id===id; })[0];
+  if (!p){ go("#/"); return; }
+  app.appendChild(crumbs([["Painel","#/"],[p.nome,null]]));
+  app.appendChild(el("div",{class:"head"},[el("h2",{text:p.nome}), el("p",{text:p.resumo})]));
+  var facts = el("div",{class:"facts"});
+  p.fatos.forEach(function(f){ facts.appendChild(el("div",{class:"fact"},[el("small",{text:f[0]}), el("strong",{text:f[1]})])); });
+  facts.appendChild(el("div",{class:"fact"},[el("small",{text:"Situação"}), el("strong",{text:phaseOf(p)})]));
+  app.appendChild(facts);
+  app.appendChild(stepPanel("", PRODUCT_STEPS, stepId,
+    function(s){ return productStatus(p,s); },
+    {navigate:function(s){ go("#/produto/"+p.id+"/"+s); }, status:function(s,v){ setStatus("p",p.id,s,v); }, linkKey:function(s){ return key("p",p.id,s); }},
+    p.etapas));
+}
+
+function viewContentHome(app){
+  app.appendChild(crumbs([["Painel","#/"],["Produção de conteúdo",null]]));
+  app.appendChild(el("div",{class:"head vinho"},[el("h2",{text:"Produção de conteúdo"}), el("p",{text:"As 5 frentes de conteúdo, cada uma com as etapas de escrita, revisão, gravação e edição."})]));
+  var g = el("section",{class:"grid"});
+  CHANNELS.forEach(function(c){
+    g.appendChild(el("button",{type:"button",class:"tile vinho",onclick:function(){ go("#/conteudo/"+c.id); }},[
+      el("span",{class:"t-name",text:c.nome}),
+      el("span",{class:"t-sub",text:c.sub})
+    ]));
+  });
+  app.appendChild(g);
+}
+
+function viewChannel(app, id, stepId){
+  var c = CHANNELS.filter(function(x){ return x.id===id; })[0];
+  if (!c){ go("#/conteudo"); return; }
+  app.appendChild(crumbs([["Painel","#/"],["Produção de conteúdo","#/conteudo"],[c.nome,null]]));
+  app.appendChild(el("div",{class:"head vinho"},[el("h2",{text:c.nome}), el("p",{text:c.sub})]));
+  app.appendChild(stepPanel("vinho", CONTENT_STEPS, stepId,
+    function(s){ return channelStatus(c,s); },
+    {navigate:function(s){ go("#/conteudo/"+c.id+"/"+s); }, status:function(s,v){ setStatus("c",c.id,s,v); }, linkKey:function(s){ return key("c",c.id,s); }},
+    c.etapas));
+}
+
+function viewInfoHome(app){
+  app.appendChild(crumbs([["Painel","#/"],["Informações básicas",null]]));
+  app.appendChild(el("div",{class:"head telha"},[el("h2",{text:"Informações básicas"}), el("p",{text:"O material de base sobre você, a Empresa Produtiva, o posicionamento, a persona e a esteira."})]));
+  var g = el("section",{class:"grid"});
+  INFO.forEach(function(it){
+    g.appendChild(el("button",{type:"button",class:"tile telha",onclick:function(){ go("#/info/"+it.id); }},[
+      el("span",{class:"t-name",text:it.nome}),
+      el("span",{class:"t-sub",text:it.sub})
+    ]));
+  });
+  app.appendChild(g);
+}
+
+function viewInfo(app, id){
+  var it = INFO.filter(function(x){ return x.id===id; })[0];
+  if (!it){ go("#/info"); return; }
+  app.appendChild(crumbs([["Painel","#/"],["Informações básicas","#/info"],[it.nome,null]]));
+  app.appendChild(el("div",{class:"head telha"},[el("h2",{text:it.nome}), el("p",{text:it.sub})]));
+  var panel = el("section",{class:"panel"});
+  if (it.notas) panel.appendChild(notesList(it.notas));
+  if (it.esteira){
+    var wrapT = el("div",{class:"tablewrap"});
+    var t = el("table",{class:"esteira"});
+    t.appendChild(el("thead",{},[el("tr",{},[el("th",{text:"Produto"}),el("th",{text:"Formato"}),el("th",{text:"Preço"}),el("th",{text:"Situação"})])]));
+    var tb = el("tbody");
+    PRODUCTS.forEach(function(p){
+      tb.appendChild(el("tr",{},[
+        el("td",{},[el("button",{type:"button",class:"linkish",style:"background:none;border:0;padding:0;cursor:pointer;text-align:left;font-weight:600;text-decoration:underline;text-underline-offset:3px",text:p.nome,onclick:function(){ go("#/produto/"+p.id); }})]),
+        el("td",{text:p.sub}),
+        el("td",{text:p.fatos.filter(function(f){return /Preço|meses|Retorno/.test(f[0]);}).map(function(f){ return f[0]==="Preço"?f[1]:f[0]+": "+f[1]; }).join("; ")}),
+        el("td",{text:phaseOf(p)})
+      ]));
+    });
+    t.appendChild(tb); wrapT.appendChild(t); panel.appendChild(wrapT);
+  }
+  if (it.docs) it.docs.forEach(function(d, i){ panel.appendChild(docBlock(d[0], d[1], i===0 && it.docs.length===1)); });
+  panel.appendChild(linksBlock("i:" + it.id));
+  app.appendChild(panel);
+}
+
+function render(){
+  var app = document.getElementById("app");
+  app.innerHTML = "";
+  var r = route();
+  if (r[0]==="produto") viewProduct(app, r[1], r[2]);
+  else if (r[0]==="conteudo" && r[1]) viewChannel(app, r[1], r[2]);
+  else if (r[0]==="conteudo") viewContentHome(app);
+  else if (r[0]==="info" && r[1]) viewInfo(app, r[1]);
+  else if (r[0]==="info") viewInfoHome(app);
+  else viewHome(app);
+}
+
+function rerender(){
+  if (document.getElementById("painel").hidden) return;
+  var y = window.scrollY;
+  render();
+  window.scrollTo(0, y);
+}
+
+window.addEventListener("hashchange", function(){ if (!document.getElementById("painel").hidden) render(); });
+
+
+/* Firebase */
+var firebaseConfig = {
+  apiKey: "AIzaSyAmTYAK2LgBSiwyloK6TjyJL5t7W4CcXYQ",
+  authDomain: "ecossistema-a48e5.firebaseapp.com",
+  projectId: "ecossistema-a48e5",
+  storageBucket: "ecossistema-a48e5.firebasestorage.app",
+  messagingSenderId: "628791147647",
+  appId: "1:628791147647:web:2822f981737730b390534a"
+};
+var fbApp = initializeApp(firebaseConfig);
+var auth = getAuth(fbApp);
+var db = getFirestore(fbApp);
+var fsApi = {doc: doc, getDoc: getDoc, setDoc: setDoc, onSnapshot: onSnapshot};
+var unsubs = [];
+
+var loginBox = document.getElementById("login");
+var painel = document.getElementById("painel");
+var carregando = document.getElementById("carregando");
+var loginMsg = document.getElementById("login-msg");
+
+function clean(obj, check){
+  var out = {};
+  if (obj && typeof obj === "object"){
+    Object.keys(obj).forEach(function(k){ if (check(obj[k])) out[k] = obj[k]; });
+  }
+  return out;
+}
+
+onAuthStateChanged(auth, function(user){
+  unsubs.forEach(function(u){ u(); });
+  unsubs = [];
+  carregando.hidden = true;
+  if (!user){
+    fb = null; overrides = {}; links = {}; docCache = {}; openDocs = {};
+    painel.hidden = true;
+    loginBox.hidden = false;
+    return;
+  }
+  fb = {db: db, fs: fsApi};
+  loginBox.hidden = true;
+  painel.hidden = false;
+  document.getElementById("quem").textContent = user.email || "";
+  document.getElementById("aviso").hidden = true;
+  render();
+  function denied(e){
+    if (e && e.code === "permission-denied") showError("Este login não tem permissão para ler o painel. Confira se o UID nas regras do Firestore é o do seu usuário.");
+    else showError("Não foi possível ler os dados do painel. Confira a conexão e recarregue a página.");
+  }
+  unsubs.push(onSnapshot(doc(db,"painel","status"), function(s){
+    var d = s.exists() ? s.data() : null;
+    overrides = clean(d && d.status, function(v){ return typeof v === "string" && !!STATUS[v]; });
+    rerender();
+  }, denied));
+  unsubs.push(onSnapshot(doc(db,"painel","links"), function(s){
+    var d = s.exists() ? s.data() : null;
+    links = clean(d && d.links, function(v){ return Array.isArray(v); });
+    rerender();
+  }, denied));
+});
+
+document.getElementById("login-form").addEventListener("submit", function(ev){
+  ev.preventDefault();
+  var email = document.getElementById("email").value.trim();
+  var senha = document.getElementById("senha").value;
+  loginMsg.textContent = "Entrando...";
+  signInWithEmailAndPassword(auth, email, senha).then(function(){
+    loginMsg.textContent = "";
+    document.getElementById("senha").value = "";
+  }).catch(function(e){
+    var c = e && e.code;
+    if (c === "auth/invalid-credential" || c === "auth/wrong-password" || c === "auth/user-not-found" || c === "auth/invalid-email") loginMsg.textContent = "E-mail ou senha incorretos.";
+    else if (c === "auth/too-many-requests") loginMsg.textContent = "Muitas tentativas seguidas. Espere alguns minutos e tente de novo.";
+    else loginMsg.textContent = "Não foi possível entrar. Confira a conexão e tente de novo.";
+  });
+});
+
+document.getElementById("esqueci").addEventListener("click", function(){
+  var email = document.getElementById("email").value.trim();
+  if (!email){ loginMsg.textContent = "Digite o seu e-mail acima e clique de novo em Esqueci a senha."; return; }
+  sendPasswordResetEmail(auth, email).then(function(){
+    loginMsg.textContent = "Se esse e-mail estiver cadastrado, o link para criar uma senha nova chega em alguns minutos.";
+  }).catch(function(){
+    loginMsg.textContent = "Não foi possível enviar o e-mail. Confira o endereço e tente de novo.";
+  });
+});
+
+document.getElementById("sair").addEventListener("click", function(){ signOut(auth); });
+
+var arquivo = document.getElementById("arquivo");
+var importMsg = document.getElementById("import-msg");
+document.getElementById("importar").addEventListener("click", function(){ arquivo.click(); });
+arquivo.addEventListener("change", function(){
+  var f = arquivo.files && arquivo.files[0];
+  arquivo.value = "";
+  if (!f || !fb) return;
+  f.text().then(function(txt){
+    var data;
+    try { data = JSON.parse(txt); } catch(e){ importMsg.textContent = "Esse arquivo não é o documentos.json. Escolha o arquivo certo."; return; }
+    var keys = Object.keys(data || {}).filter(function(k){ return /^[a-z0-9_]+$/i.test(k) && data[k] && typeof data[k].html === "string"; });
+    if (!keys.length){ importMsg.textContent = "Nenhum documento encontrado nesse arquivo."; return; }
+    if (!window.confirm("Importar " + keys.length + " documentos? Os documentos com o mesmo nome no painel serão substituídos.")) return;
+    var i = 0;
+    function next(){
+      if (i >= keys.length){
+        docCache = {};
+        importMsg.textContent = keys.length + " documentos importados.";
+        rerender();
+        return Promise.resolve();
+      }
+      var k = keys[i];
+      importMsg.textContent = "Importando " + (i + 1) + " de " + keys.length + "...";
+      var html = data[k].html.replace(/<script[\s\S]*?<\/script>/gi, "");
+      return setDoc(doc(db,"documentos",k), {titulo: String(data[k].titulo || k), html: html, atualizado: serverTimestamp()}).then(function(){ i++; return next(); });
+    }
+    next().catch(function(e){
+      importMsg.textContent = "A importação parou no documento " + (i + 1) + ". Confira a conexão e importe de novo. (" + ((e && e.code) || "erro") + ")";
+    });
+  });
+});
+
+</script>
+</body>
+</html>
