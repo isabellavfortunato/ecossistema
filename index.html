@@ -342,6 +342,16 @@ var REGRAS_REVISAO = [
 
 var PRODUCTS = [
   {
+    id:"desafio", nome:"Desafio Empresa Produtiva",
+    sub:"Desafio com a inteligência artificial, uma tarefa por dia",
+    resumo:"Desafio em que a dona de negócio aplica a inteligência artificial na própria empresa, uma tarefa por dia, e termina com o convite para a Consultoria Express, com condição especial para quem fez o desafio. Há uma versão de 10 dias, com um vídeo curto e um guia por dia, e uma versão de 15 dias, com texto curto e áudio pelo WhatsApp.",
+    fatos:[["Preço","A definir"],["Versões","10 dias e 15 dias"]],
+    defaults:{escrever:"semdado",revisar:"semdado",gravar:"semdado",editar:"semdado",criativos:"semdado",paginas:"semdado"},
+    etapas:{
+      escrever:{notas:["O guia da versão de 15 dias cita também uma versão de 7 dias, que ainda não foi anexada ao painel."],docs:[["desafio_10","Desafio 10 dias com a inteligência artificial"],["desafio_15","Desafio 15 dias com a inteligência artificial"]]}
+    }
+  },
+  {
     id:"express", nome:"Consultoria Express",
     sub:"Consultoria individual de 2 horas",
     resumo:"Conversa individual de 2 horas com 4 entregáveis: o resumo com o problema central, o checklist de tarefas mínimas, o plano de ação aprofundado e o vídeo personalizado como bônus. É a porta de entrada da esteira.",
@@ -408,6 +418,16 @@ var PRODUCTS = [
     defaults:{escrever:"semdado",revisar:"semdado",gravar:"semdado",editar:"semdado",criativos:"semdado",paginas:"semdado"},
     etapas:{
       escrever:{notas:["Estrutura da mentoria, versão 3."],docs:[["mentoria","Estrutura da mentoria, versão 3"]]}
+    }
+  },
+  {
+    id:"networking", nome:"Empresa Produtiva - Grupo de Networking",
+    sub:"Grupo online por anuidade, com encontros semanais",
+    resumo:"Grupo online de empresárias, com encontro semanal de 1 hora e meia pelo Google Meet, de 12 a 18 integrantes, rotação mensal de 4 semanas temáticas e a roda do pedido e da oferta no centro. Os encontros abertos online, de 2 horas, funcionam como vitrine do grupo. O presencial entra 1 ou 2 vezes por ano, no encerramento do ciclo de 12 meses.",
+    fatos:[["Preço","A definir"],["Encontro semanal","1 hora e meia"],["Encontro aberto","2 horas"]],
+    defaults:{escrever:"semdado",revisar:"semdado",gravar:"semdado",editar:"semdado",criativos:"semdado",paginas:"semdado"},
+    etapas:{
+      escrever:{notas:["Os 2 manuais tratam da adaptação para o online. Os roteiros completos dos encontros ficam no documento principal do grupo, que ainda não foi anexado ao painel."],docs:[["networking_semanal","Manual do encontro semanal do grupo online"],["networking_abertos","Manual dos encontros abertos online"]]}
     }
   }
 ];
@@ -500,6 +520,13 @@ var CHANNELS = [
       ]},
       revisar:{notas:REGRAS_REVISAO}
     }
+  },
+  {
+    id:"live", nome:"Live do TikTok", sub:"Transmissões ao vivo",
+    etapas:{
+      escrever:{notas:["Já existe um banner de live do TikTok pronto.","Ainda não há regras próprias de roteiro registradas para as lives."]},
+      revisar:{notas:REGRAS_REVISAO}
+    }
   }
 ];
 
@@ -515,7 +542,7 @@ var INFO = [
    docs:[["problemas","Problemas e soluções, 16 de setembro"]]},
   {id:"leticia", nome:"Quem é a Letícia", sub:"A persona",
    docs:[["leticia","A minha persona, a Letícia"]]},
-  {id:"esteira", nome:"Esteira e preços", sub:"Os 6 produtos lado a lado", esteira:true}
+  {id:"esteira", nome:"Esteira e preços", sub:"Os 8 produtos lado a lado", esteira:true}
 ];
 
 /* estado */
@@ -761,8 +788,8 @@ function viewHome(app){
   var g2 = el("section",{class:"grid duo"});
   g2.appendChild(el("button",{type:"button",class:"tile vinho",onclick:function(){ go("#/conteudo"); }},[
     el("span",{class:"t-name",text:"Produção de conteúdo"}),
-    el("span",{class:"t-sub",text:"Instagram, TikTok, stories, carrosséis e YouTube"}),
-    el("span",{class:"t-phase",text:"5 frentes"})
+    el("span",{class:"t-sub",text:"Instagram, TikTok, stories, carrosséis, YouTube e live do TikTok"}),
+    el("span",{class:"t-phase",text:"6 frentes"})
   ]));
   g2.appendChild(el("button",{type:"button",class:"tile telha",onclick:function(){ go("#/info"); }},[
     el("span",{class:"t-name",text:"Informações básicas"}),
@@ -825,7 +852,7 @@ function viewProduct(app, id, stepId){
 
 function viewContentHome(app){
   app.appendChild(crumbs([["Painel","#/"],["Produção de conteúdo",null]]));
-  app.appendChild(el("div",{class:"head vinho"},[el("h2",{text:"Produção de conteúdo"}), el("p",{text:"As 5 frentes de conteúdo, cada uma com as etapas de escrita, revisão, gravação e edição."})]));
+  app.appendChild(el("div",{class:"head vinho"},[el("h2",{text:"Produção de conteúdo"}), el("p",{text:"As 6 frentes de conteúdo, cada uma com as etapas de escrita, revisão, gravação e edição."})]));
   var g = el("section",{class:"grid"});
   CHANNELS.forEach(function(c){
     g.appendChild(el("button",{type:"button",class:"tile vinho",onclick:function(){ go("#/conteudo/"+c.id); }},[
@@ -876,7 +903,7 @@ function viewInfo(app, id){
       tb.appendChild(el("tr",{},[
         el("td",{},[el("button",{type:"button",class:"linkish",style:"background:none;border:0;padding:0;cursor:pointer;text-align:left;font-weight:600;text-decoration:underline;text-underline-offset:3px",text:p.nome,onclick:function(){ go("#/produto/"+p.id); }})]),
         el("td",{text:p.sub}),
-        el("td",{text:p.fatos.filter(function(f){return /Preço|meses|Retorno/.test(f[0]);}).map(function(f){ return f[0]==="Preço"?f[1]:f[0]+": "+f[1]; }).join("; ")}),
+        el("td",{text:p.fatos.filter(function(f){return /Preço|meses|Retorno|Versões/.test(f[0]);}).map(function(f){ return f[0]==="Preço"?f[1]:f[0]+": "+f[1]; }).join("; ")}),
         el("td",{text:phaseOf(p)})
       ]));
     });
